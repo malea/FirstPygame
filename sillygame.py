@@ -47,7 +47,7 @@ class Fist(pygame.sprite.Sprite):
     #moves a clenched fist on the screen, following the mouse
     def __init__(self):
         pygame.sprite.Sprite.__init__(self) #call Sprite initializer
-        self.image, self.rect = load_image('fist.bmp', -1)
+        self.image, self.rect = load_image('fist.jpg', -1)
         self.punching = 0
 
     def update(self):
@@ -72,7 +72,7 @@ class Clown(pygame.sprite.Sprite):
     #move clown around screen
     def __init__(self):
         pygame.sprite.Sprite.__init__(self) #call Sprite intializer
-        self.image, self.rect = load_image('clown.bmp', -1)
+        self.image, self.rect = load_image('clown.jpg', -1)
         screen = pygame.display.get_surface()
         self.area = screen.get_rect()
         self.rect.topleft = 10, 10
@@ -118,7 +118,7 @@ def main():
   
     #initialize stuff         
     pygame.init()
-    screen = pygame.display.set_mode((468,60))
+    screen = pygame.display.set_mode((400,400))
     pygame.display.set_caption('Clowning Around')
     pygame.mouse.set_visible(0)
 
@@ -134,8 +134,8 @@ def main():
         background.blit(text, textpos)
     
     #create objects
-    whiff_sound = load_sound('whiff.wav')
-    punch_sound = load_sound('punch.wav')
+    whiff_sound = load_sound('creepysong.mp3')
+    punch_sound = load_sound('punch.mp3')
     clown = Clown()
     fist = Fist()
     allsprites = pygame.sprite.RenderPlain((fist, clown))
@@ -143,6 +143,7 @@ def main():
 
     #game runs on infinite loop
     while 1:
+        #whiff_sound.play()
         clock.tick(60)
 
         #simple working event queue
@@ -152,9 +153,9 @@ def main():
             elif event.type == KEYDOWN and event.key == K_ESCAPE:
                 return
             elif event.type == MOUSEBUTTONDOWN:
-                if fist.punch(chimp):
+                if fist.punch(clown):
                     punch_sound.play() #punch
-                    chimp.punched()
+                    clown.punched()
                 else:
                     whiff_sound.play() #miss
             elif event.type == MOUSEBUTTONUP:
