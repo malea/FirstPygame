@@ -89,12 +89,12 @@ class Clown(pygame.sprite.Sprite):
         #move clown around and turn if at edge
         newpos = self.rect.move((self.move, 0))
         if not self.area.contains(newpos):
-	if self.rect.left < self.area.left or \
-		self.rect.right > self.area.right:
-            self.move = -self.move
-            newpos = self.rect.move((self.move, 0))
-            self.image = pygame.transform.flip(self.image, 1, 0)
-        self.rect = newpos
+	        if self.rect.left < self.area.left or \
+	        self.rect.right > self.area.right:
+                    self.move = -self.move
+                    newpos = self.rect.move((self.move, 0))
+                    self.image = pygame.transform.flip(self.image, 1, 0)
+                    self.rect = newpos
 
     def _spin(self):
         #spin the clown
@@ -124,6 +124,13 @@ pygame.mouse.set_visible(0)
 background = pygame.Surface(screen.get_size())
 background = background.convert()
 background.fill((250,250,250))
+
+if pygame.font:
+    font = pygame.font.Font(None, 36)
+    text = font.render("Punch the Clown...Clowns are EVIL!", 1, (10,10,10))
+    textpos = text.get_rect(centerx=background.get_width()/2)
+    background.blit(text, textpos)
+    
 
 
 
